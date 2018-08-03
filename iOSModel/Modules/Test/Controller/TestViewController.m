@@ -23,9 +23,14 @@
     // Do any additional setup after loading the view.
     self.title = @"测试";
 	
-	// 给个网络异常 
-	self.placeholderView.type = CQPlaceholderViewTypeNoNetwork;
-	[self.view addSubview:self.placeholderView];
+//	// 给个网络异常
+//	self.placeholderView.type = CQPlaceholderViewTypeNoNetwork;
+//	[self.view addSubview:self.placeholderView]; // 可添加到tableview或者view 上
+	
+	[self.tableView reloadData];
+	self.placeholderView.type = CQPlaceholderViewTypeNoGoods;
+	[self.tableView addSubview:self.placeholderView];
+	
 }
 
 - (NSMutableArray *)dataAry{
@@ -44,9 +49,6 @@
 	}
 	return _tableView;
 }
-
-
-
 
 #pragma - 父类方法
 - (void)reloadViewData {
