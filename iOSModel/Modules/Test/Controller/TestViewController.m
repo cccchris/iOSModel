@@ -30,8 +30,8 @@
 	[self.tableView reloadData];
 	self.placeholderView.type = CQPlaceholderViewTypeNoGoods;
 	[self.tableView addSubview:self.placeholderView];
-	
 }
+
 
 - (NSMutableArray *)dataAry{
 	if (!_dataAry) {
@@ -50,7 +50,7 @@
 	return _tableView;
 }
 
-#pragma - 父类方法
+#pragma mark- 父类方法
 - (void)reloadViewData {
 	// 设置数据
 	[self.dataAry removeAllObjects];
@@ -63,7 +63,7 @@
 	[self.tableView reloadData];
 }
 
-
+#pragma mark- 代理方法
 - (UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
 	TestCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
 	if (!cell) {
