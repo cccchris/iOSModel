@@ -16,6 +16,7 @@
 // 重新加载数据
 - (void)reloadViewData;
 
+- (void)addPlaceholeerViewFrame:(CGRect)frame withType:(CQPlaceholderViewType)type desText:(NSString *)text;
 @end
 
 /*

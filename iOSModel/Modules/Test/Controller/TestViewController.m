@@ -23,15 +23,17 @@
     // Do any additional setup after loading the view.
     self.title = @"测试";
 	
-//	// 给个网络异常
-//	self.placeholderView.type = CQPlaceholderViewTypeNoNetwork;
-//	[self.view addSubview:self.placeholderView]; // 可添加到tableview或者view 上
-	
 	[self.tableView reloadData];
-	self.placeholderView.type = CQPlaceholderViewTypeNoGoods;
-	[self.tableView addSubview:self.placeholderView];
+	
+	if (self.dataAry.count == 0) {
+		self.tableView.backgroundColor = KClearColor;
+		if (!self.placeholderView) {
+			[self addPlaceholeerViewFrame:CGRectMake(0, 0, KScreenWidth, 320) withType:CQPlaceholderViewTypeNoData desText:@"暂时没有数据"];
+		}
+	}else {
+		self.tableView.backgroundColor = KWhiteColor;
+	}	
 }
-
 
 - (NSMutableArray *)dataAry{
 	if (!_dataAry) {

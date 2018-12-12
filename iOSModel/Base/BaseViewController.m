@@ -36,12 +36,17 @@
 	
 }
 
-- (CQPlaceholderView *)placeholderView {
-	if (!_placeholderView) {
-		_placeholderView = [[CQPlaceholderView alloc] initWithFrame:self.view.frame type:CQPlaceholderViewTypeNoNetwork delegate:self];
-	}
+- (void)addPlaceholeerViewFrame:(CGRect)frame withType:(CQPlaceholderViewType)type desText:(NSString *)text{
+	_placeholderView = nil;
 	
-	return _placeholderView;
+	_placeholderView = [[CQPlaceholderView alloc] initWithFrame:frame type:type delegate:self];
+	[_placeholderView setDesText:text];
+	
+	[self.view addSubview:_placeholderView];
+	// 如果需要用 其他方式刷新页面， 就可以将试图添加在最底部，
+	//[self.view insertSubview:_placeholderView atIndex:0];
+	//如果由自身的控件刷新页面，就将视图添加在最上层
+	[self.view bringSubviewToFront:_placeholderView];
 }
 
 #pragma mark - Delegate - 占位图
@@ -54,7 +59,7 @@
 		}
 			break;
 			
-		case CQPlaceholderViewTypeNoOrder:       // 没有订单
+		case CQPlaceholderViewTypeNoData:       // 没有订单
 		{
 			//[self.view makeToast:@"拉到就拉到"];
 		}

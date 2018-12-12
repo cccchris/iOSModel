@@ -34,6 +34,11 @@
 	_type = type;
 }
 
+- (void)setDesText:(NSString *)desText {
+	_desText = desText;
+	// UI搭建
+	[self setUpUI];
+}
 #pragma mark - UI搭建
 /** UI搭建 */
 - (void)setUpUI{
@@ -61,15 +66,15 @@
         case CQPlaceholderViewTypeNoNetwork: // 没网
         {
             imageView.image = [UIImage imageNamed:@"network-error"];
-            descLabel.text = @"没网，不约";
+            descLabel.text = _desText;
             [reloadButton setTitle:@"点击重试" forState:UIControlStateNormal];
         }
             break;
             
-        case CQPlaceholderViewTypeNoOrder: // 没订单
+        case CQPlaceholderViewTypeNoData: // 没订单
         {
             imageView.image = [UIImage imageNamed:@"network-error"];
-            descLabel.text = @"暂无订单";
+            descLabel.text = _desText;
             [reloadButton setTitle:@"重新加载" forState:UIControlStateNormal];
         }
             break;
@@ -77,7 +82,7 @@
         case CQPlaceholderViewTypeNoGoods: // 没商品
         {
             imageView.image = [UIImage imageNamed:@"network-error"];
-            descLabel.text = @"打发点咯";
+            descLabel.text = _desText;
             [reloadButton setTitle:@"买买买" forState:UIControlStateNormal];
         }
             break;

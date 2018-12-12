@@ -29,6 +29,20 @@
 	return YES;
 }
 
+/*
+  // 可用于通知跳转 对应控制器
+ 		UIViewController *rootVC = [[UIViewController alloc] init];
+ 		if ([rootVC isKindOfClass:[MainTabBarController class]]) {
+ 			MainTabBarController *mainTabVC = (MainTabBarController *)rootVC;
+ 			//创建你要进入的控制器
+ 			StuHomeWorkController *workVc = [[StuHomeWorkController alloc] init];
+ 			UINavigationController *nav = mainTabVC.selectedViewController;
+ 			if (![nav.visibleViewController isKindOfClass:[StuHomeWorkController class]]) {//这里如果要直接推
+ 				//如果是在你这个页面，则不需要push,反之push
+ 				[nav pushViewController:workVc animated:YES];
+ 			}
+ 		}
+ */
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 	// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

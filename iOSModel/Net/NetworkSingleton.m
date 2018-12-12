@@ -51,7 +51,7 @@ static AFHTTPSessionManager *manager;
     NSString *requestURL = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     //NSString *requestURL = [baseUrl stringByAppendingString:ut8Str];
     // 3. 构造一个操作对象的管理者
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted];
     manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
     // 这里要注意一下，不同的接口，我们在这里拼接一下可能会出错
@@ -60,7 +60,12 @@ static AFHTTPSessionManager *manager;
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     manager.requestSerializer.timeoutInterval = TIMEOUT;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    
+	
+//    可用于需要设置token 为 header 参数 的接口调用
+//	if (![urlString isEqualToString:API_LOGIN]) {
+//		[manager.requestSerializer setValue:[SPUtil objectForKey:k_app_userToken] forHTTPHeaderField:@"token"];
+//	}
+	
     // 统一打印参数
     DLog(@"%@地址：{{%@}}",title,urlString);
     if (parmas != nil) {
@@ -81,6 +86,19 @@ static AFHTTPSessionManager *manager;
         if (successBlock) {
             DLog(@"%@成功返回:{{%@}}",title,responseObject);
             successBlock(responseObject);
+//          接口规范的情况下，可以用一下代码， 处理token 失效重新登录情况。
+//			if ([responseObject[@"code"] integerValue] == 0) {
+//				successBlock(responseObject);
+//			}else if ([responseObject[@"code"] integerValue] == 403) {
+//				failureBlock(nil);
+//				AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//				LoginViewController *loginVC = [[LoginViewController alloc] init];
+//				BaseNavViewController *loginNav = [[BaseNavViewController alloc] initWithRootViewController:loginVC];
+//				delegate.window.rootViewController = loginNav;
+//			}else {
+//				[SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+//				failureBlock(nil);
+//			}
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [SVProgressHUD dismiss];
@@ -104,7 +122,7 @@ static AFHTTPSessionManager *manager;
     // 1 拼接地址
     NSString *requestURL = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     // 3. 构造一个操作对象的管理者
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted];
     manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
     // 这里要注意一下，不同的接口，我们在这里拼接一下可能会出错
@@ -113,6 +131,10 @@ static AFHTTPSessionManager *manager;
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     manager.requestSerializer.timeoutInterval = TIMEOUT;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+	//    可用于需要设置token 为 header 参数 的接口调用
+	//	if (![urlString isEqualToString:API_LOGIN]) {
+	//		[manager.requestSerializer setValue:[SPUtil objectForKey:k_app_userToken] forHTTPHeaderField:@"token"];
+	//	}
     // 统一打印参数
     DLog(@"%@地址：{{%@}}",title,urlString);
     [SVProgressHUD showWithStatus:@"请稍后"];
@@ -123,6 +145,19 @@ static AFHTTPSessionManager *manager;
         if (successBlock) {
             DLog(@"%@成功返回：{{%@}}",title,responseObject);
             successBlock(responseObject);
+			//          接口规范的情况下，可以用一下代码， 处理token 失效重新登录情况。
+			//			if ([responseObject[@"code"] integerValue] == 0) {
+			//				successBlock(responseObject);
+			//			}else if ([responseObject[@"code"] integerValue] == 403) {
+			//				failureBlock(nil);
+			//				AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+			//				LoginViewController *loginVC = [[LoginViewController alloc] init];
+			//				BaseNavViewController *loginNav = [[BaseNavViewController alloc] initWithRootViewController:loginVC];
+			//				delegate.window.rootViewController = loginNav;
+			//			}else {
+			//				[SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+			//				failureBlock(nil);
+			//			}
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [SVProgressHUD dismiss];
@@ -152,7 +187,7 @@ static AFHTTPSessionManager *manager;
     // 1 拼接地址
     NSString *requestURL = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     // 3. 构造一个操作对象的管理者
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted];
     manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
     

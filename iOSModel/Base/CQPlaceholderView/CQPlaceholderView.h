@@ -13,7 +13,7 @@ typedef NS_ENUM(NSInteger, CQPlaceholderViewType) {
     /** 没网 */
     CQPlaceholderViewTypeNoNetwork = 1,
     /** 没订单 */
-    CQPlaceholderViewTypeNoOrder,
+    CQPlaceholderViewTypeNoData,
     /** 没商品 */
     CQPlaceholderViewTypeNoGoods,
 };
@@ -38,7 +38,8 @@ typedef NS_ENUM(NSInteger, CQPlaceholderViewType) {
 @property (nonatomic, assign) CQPlaceholderViewType type;
 /** 占位图的代理方（只读） */
 @property (nonatomic, weak, readonly) id <CQPlaceholderViewDelegate> delegate;
-
+/** 占位图底部文字*/
+@property (nonatomic, strong) NSString *desText;
 /**
  构造方法
  
